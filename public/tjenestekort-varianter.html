@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tjenestekort-varianter — Svartdahl Bygg</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --ink-soft: #4a4a4a;
+      --paper: #fafaf7;
+      --paper-warm: #f3efe7;
+      --line: #e5e1d8;
+      --accent: #000814;
+      --accent-dark: #001a30;
+      --gold: #c8b478;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    h1, h2, h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- PAGE HEADER ---------- */
+    .page-head {
+      padding: 64px 0 32px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 64px;
+      background: white;
+    }
+    .page-head h1 {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+    .page-head p {
+      color: var(--ink-soft);
+      font-size: 17px;
+      max-width: 640px;
+    }
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .toc a {
+      padding: 6px 14px;
+      background: var(--paper-warm);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .toc a:hover { background: var(--gold); border-color: var(--gold); }
+
+    /* ---------- VARIANT SECTION ---------- */
+    .variant {
+      padding: 48px 0 32px;
+    }
+    .variant-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    .variant-number {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .variant h2 {
+      font-size: 32px;
+    }
+    .variant-tagline {
+      color: var(--ink-soft);
+      font-size: 16px;
+      margin-bottom: 6px;
+      max-width: 720px;
+    }
+    .variant-when {
+      font-size: 13px;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin-bottom: 36px;
+      max-width: 720px;
+    }
+    .variant-when strong { color: var(--ink); font-style: normal; }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .cards-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 900px;
+    }
+
+    @media (max-width: 900px) {
+      .cards-3 { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       VARIANT 1 — KLASSISK: Bilde på topp
+       ============================================================ */
+    .v1 .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .v1 .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+    }
+    .v1 .card-image {
+      aspect-ratio: 4 / 3;
+      background-size: cover;
+      background-position: center;
+    }
+    .v1 .card-body { padding: 28px 24px; }
+    .v1 .card h3 { font-size: 22px; margin-bottom: 10px; }
+    .v1 .card p {
+      color: var(--ink-soft);
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+    .v1 .card-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline-flex;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .v1 .card:hover .card-link { gap: 12px; }
+
+    /* ============================================================
+       VARIANT 2 — EDITORIAL: Bilde til venstre, tekst til høyre
+       ============================================================ */
+    .v2 .card {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .v2 .card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+    }
+    .v2 .card-image {
+      background-size: cover;
+      background-position: center;
+      min-height: 220px;
+    }
+    .v2 .card-body { padding: 32px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .v2 .card-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .v2 .card h3 { font-size: 26px; margin-bottom: 10px; }
+    .v2 .card p {
+      color: var(--ink-soft);
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+    .v2 .card-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline-flex;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .v2 .card:hover .card-link { gap: 12px; }
+
+    @media (max-width: 700px) {
+      .v2 .card { grid-template-columns: 1fr; }
+      .v2 .card-image { min-height: 200px; }
+    }
+
+    /* ============================================================
+       VARIANT 3 — CINEMATIC: Helbilde med mørk gradient
+       ============================================================ */
+    .v3 .card {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      border-radius: 12px;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .v3 .card:hover { transform: scale(1.02); }
+    .v3 .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        transparent 30%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,8,20,0.92) 100%
+      );
+    }
+    .v3 .card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 28px 24px;
+      color: white;
+    }
+    .v3 .card-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .v3 .card h3 { color: white; font-size: 24px; margin-bottom: 8px; }
+    .v3 .card p {
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+      margin-bottom: 14px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.4s, opacity 0.4s, margin-bottom 0.4s;
+    }
+    .v3 .card:hover p {
+      max-height: 80px;
+      opacity: 1;
+      margin-bottom: 14px;
+    }
+    .v3 .card-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      display: inline-flex;
+      gap: 6px;
+    }
+
+    /* ============================================================
+       VARIANT 4 — MINIMAL: Tekst-tung, liten thumbnail
+       ============================================================ */
+    .v4 .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 72px;
+      gap: 20px;
+      align-items: start;
+      transition: border-color 0.2s;
+    }
+    .v4 .card:hover { border-color: var(--accent); }
+    .v4 .card-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+    }
+    .v4 .card-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .v4 .card h3 { font-size: 20px; margin-bottom: 8px; }
+    .v4 .card p {
+      color: var(--ink-soft);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    .v4 .card-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline-flex;
+      gap: 6px;
+    }
+
+    /* ============================================================
+       VARIANT 5 — POLAROID: Hvit ramme, håndverker-følelse
+       ============================================================ */
+    .v5-bg { background: var(--paper-warm); padding: 32px; border-radius: 16px; }
+    .v5 .card {
+      background: white;
+      padding: 14px 14px 24px;
+      border-radius: 4px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .v5 .card:nth-child(1) { transform: rotate(-0.7deg); }
+    .v5 .card:nth-child(2) { transform: rotate(0.3deg); }
+    .v5 .card:nth-child(3) { transform: rotate(-0.4deg); }
+    .v5 .card:hover {
+      transform: rotate(0deg) translateY(-4px);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.1);
+    }
+    .v5 .card-image {
+      aspect-ratio: 4 / 3;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 18px;
+    }
+    .v5 .card-body {
+      text-align: center;
+      padding: 0 8px;
+    }
+    .v5 .card-eyebrow {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .v5 .card h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .v5 .card p {
+      color: var(--ink-soft);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    .v5 .card-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .compare {
+      margin-top: 96px;
+      padding: 48px 0;
+      background: var(--accent);
+      color: white;
+      border-radius: 16px;
+    }
+    .compare .container { text-align: center; }
+    .compare h2 { color: white; font-size: 28px; margin-bottom: 14px; }
+    .compare p { color: rgba(255,255,255,0.75); max-width: 540px; margin: 0 auto; }
+
+  </style>
+</head>
+<body>
+
+  <header class="page-head">
+    <div class="container">
+      <h1>Tjenestekort-varianter</h1>
+      <p>Fem ulike måter å presentere tjenestene på — fra klassisk og trygt til kinematisk og editorial. Hold musen over kortene for å se hover-tilstand. Velg en, så implementerer vi den i hovedsiden.</p>
+      <nav class="toc">
+        <a href="#v1">1. Klassisk</a>
+        <a href="#v2">2. Editorial</a>
+        <a href="#v3">3. Cinematic</a>
+        <a href="#v4">4. Minimal</a>
+        <a href="#v5">5. Polaroid</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================
+       VARIANT 1 — KLASSISK
+       ============================================ -->
+  <section id="v1" class="variant v1">
+    <div class="container">
+      <div class="variant-head">
+        <span class="variant-number">01</span>
+        <h2>Klassisk — bilde på topp</h2>
+      </div>
+      <p class="variant-tagline">Den trygge, kjente løsningen. Bilde fyller toppen, tekst og CTA under. Veldig lesbar i grid på 3 kolonner.</p>
+      <p class="variant-when"><strong>Passer for:</strong> Bred målgruppe, profesjonelt og rolig uttrykk, ikke for trendy. <strong>Risiko:</strong> Kan føles litt generisk hvis bildene ikke skiller seg ut.</p>
+
+      <div class="cards-3">
+        <div class="card">
+          <div class="card-image" style="background-image: url('https://picsum.photos/seed/terrasse1/800/600');"></div>
+          <div class="card-body">
+            <h3>Terrasser og platting</h3>
+            <p>Trygg konstruksjon og materialer som tåler vestfoldværet. Med eller uten rekkverk.</p>
+            <a href="#" class="card-link">Forespør terrasse →</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background-image: url('https://picsum.photos/seed/kjokken1/800/600');"></div>
+          <div class="card-body">
+            <h3>Kjøkkenmontering</h3>
+            <p>Fra IKEA, HTH eller spesialsnekret — vi monterer presist og tilpasser til skjeve vegger.</p>
+            <a href="#" class="card-link">Forespør montering →</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background-image: url('https://picsum.photos/seed/renovering1/800/600');"></div>
+          <div class="card-body">
+            <h3>Renovering</h3>
+            <p>Bad, kjellerstuer, hytter og enkeltrom. Vi koordinerer med rørlegger og elektriker.</p>
+            <a href="#" class="card-link">Forespør renovering →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VARIANT 2 — EDITORIAL
+       ============================================ -->
+  <section id="v2" class="variant v2">
+    <div class="container">
+      <div class="variant-head">
+        <span class="variant-number">02</span>
+        <h2>Editorial — bilde til venstre, tekst til høyre</h2>
+      </div>
+      <p class="variant-tagline">Magasinaktig layout med horisontale kort. Mer plass til hvert kort, mer "lest" enn "skannet". Skinner i 1 kolonne på desktop.</p>
+      <p class="variant-when"><strong>Passer for:</strong> Premium uttrykk, færre men større tjenester, leselig flyt. <strong>Risiko:</strong> Tar mer høyde på siden — bra hvis du vil at folk skroller.</p>
+
+      <div class="cards-2">
+        <div class="card">
+          <div class="card-image" style="background-image: url('https://picsum.photos/seed/terrasse2/800/600');"></div>
+          <div class="card-body">
+            <div class="card-eyebrow">Ute</div>
+            <h3>Terrasser og platting</h3>
+            <p>Trygg konstruksjon, pent håndverk og materialer som tåler vestfoldværet. Med eller uten rekkverk og pergola — vi tegner med deg og bygger det skikkelig.</p>
+            <a href="#" class="card-link">Forespør terrasse →</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background-image: url('https://picsum.photos/seed/kjokken2/800/600');"></div>
+          <div class="card-body">
+            <div class="card-eyebrow">Inne</div>
+            <h3>Kjøkkenmontering</h3>
+            <p>Fra IKEA, HTH eller spesialsnekret — vi monterer presist, tilpasser til skjeve vegger og fester der det skal festes. Du får et kjøkken som varer.</p>
+            <a href="#" class="card-link">Forespør montering →</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background-image: url('https://picsum.photos/seed/renovering2/800/600');"></div>
+          <div class="card-body">
+            <div class="card-eyebrow">Totalprosjekt</div>
+            <h3>Renovering</h3>
+            <p>Bad, kjellerstuer, hytter og enkeltrom. Vi koordinerer med rørlegger og elektriker så du slipper å være prosjektleder i ditt eget hjem.</p>
+            <a href="#" class="card-link">Forespør renovering →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VARIANT 3 — CINEMATIC
+       ============================================ -->
+  <section id="v3" class="variant v3">
+    <div class="container">
+      <div class="variant-head">
+        <span class="variant-number">03</span>
+        <h2>Cinematic — helbilde med tekst på toppen</h2>
+      </div>
+      <p class="variant-tagline">Dramatisk, premium, moderne. Bildet er stjernen. Tekst sitter på en mørk gradient nederst. Beskrivelsen avsløres ved hover.</p>
+      <p class="variant-when"><strong>Passer for:</strong> Hvis bildene er sterke (proff fotografering) og du vil ha et "design-tungt" inntrykk. <strong>Risiko:</strong> Krever virkelig gode bilder — middels bilder blir avslørt.</p>
+
+      <div class="cards-3">
+        <div class="card" style="background-image: url('https://picsum.photos/seed/terrasse3/800/1000');">
+          <div class="card-body">
+            <div class="card-eyebrow">Ute</div>
+            <h3>Terrasser og platting</h3>
+            <p>Trygg konstruksjon og materialer som tåler vestfoldværet.</p>
+            <a href="#" class="card-link">Forespør terrasse →</a>
+          </div>
+        </div>
+        <div class="card" style="background-image: url('https://picsum.photos/seed/kjokken3/800/1000');">
+          <div class="card-body">
+            <div class="card-eyebrow">Inne</div>
+            <h3>Kjøkkenmontering</h3>
+            <p>Vi monterer presist og tilpasser til skjeve vegger.</p>
+            <a href="#" class="card-link">Forespør montering →</a>
+          </div>
+        </div>
+        <div class="card" style="background-image: url('https://picsum.photos/seed/renovering3/800/1000');">
+          <div class="card-body">
+            <div class="card-eyebrow">Totalprosjekt</div>
+            <h3>Renovering</h3>
+            <p>Vi koordinerer med rørlegger og elektriker så du slipper.</p>
+            <a href="#" class="card-link">Forespør renovering →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VARIANT 4 — MINIMAL
+       ============================================ -->
+  <section id="v4" class="variant v4">
+    <div class="container">
+      <div class="variant-head">
+        <span class="variant-number">04</span>
+        <h2>Minimal — tekst-tung med liten thumbnail</h2>
+      </div>
+      <p class="variant-tagline">Diskret, tekstdrevet. Liten kvadratisk thumbnail i hjørnet for å bryte opp visuelt — men bildene konkurrerer ikke med hovedbudskapet.</p>
+      <p class="variant-when"><strong>Passer for:</strong> Hvis du har et sterkt hero-bilde og vil at tjenester skal være rolige og lett-lestbare. <strong>Risiko:</strong> Kan føles for nøytralt om brandet ellers er visuelt sterkt.</p>
+
+      <div class="cards-3">
+        <div class="card">
+          <div>
+            <div class="card-eyebrow">Ute</div>
+            <h3>Terrasser og platting</h3>
+            <p>Trygg konstruksjon og materialer som tåler vestfoldværet.</p>
+            <a href="#" class="card-link">Forespør terrasse →</a>
+          </div>
+          <div class="card-thumb" style="background-image: url('https://picsum.photos/seed/terrasse4/200/200');"></div>
+        </div>
+        <div class="card">
+          <div>
+            <div class="card-eyebrow">Inne</div>
+            <h3>Kjøkkenmontering</h3>
+            <p>Vi monterer presist og tilpasser til skjeve vegger.</p>
+            <a href="#" class="card-link">Forespør montering →</a>
+          </div>
+          <div class="card-thumb" style="background-image: url('https://picsum.photos/seed/kjokken4/200/200');"></div>
+        </div>
+        <div class="card">
+          <div>
+            <div class="card-eyebrow">Totalprosjekt</div>
+            <h3>Renovering</h3>
+            <p>Vi koordinerer med rørlegger og elektriker så du slipper.</p>
+            <a href="#" class="card-link">Forespør renovering →</a>
+          </div>
+          <div class="card-thumb" style="background-image: url('https://picsum.photos/seed/renovering4/200/200');"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VARIANT 5 — POLAROID
+       ============================================ -->
+  <section id="v5" class="variant v5">
+    <div class="container">
+      <div class="variant-head">
+        <span class="variant-number">05</span>
+        <h2>Polaroid — håndverker-følelse</h2>
+      </div>
+      <p class="variant-tagline">Bilde med hvit ramme, lett rotert som om de er klistret på en oppslagstavle. Personlig, jordnært, fortsatt designet.</p>
+      <p class="variant-when"><strong>Passer for:</strong> Lokal håndverker, jordnært brand, "kollegaen din" — ikke korporativt. <strong>Risiko:</strong> Kan miste presisjons-følelsen hvis du vil signalisere "vi er proffer".</p>
+
+      <div class="v5-bg">
+        <div class="cards-3">
+          <div class="card">
+            <div class="card-image" style="background-image: url('https://picsum.photos/seed/terrasse5/800/600');"></div>
+            <div class="card-body">
+              <div class="card-eyebrow">Ute</div>
+              <h3>Terrasser og platting</h3>
+              <p>Tåler vestfoldværet, varer i mange år.</p>
+              <a href="#" class="card-link">Forespør terrasse</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image" style="background-image: url('https://picsum.photos/seed/kjokken5/800/600');"></div>
+            <div class="card-body">
+              <div class="card-eyebrow">Inne</div>
+              <h3>Kjøkkenmontering</h3>
+              <p>Presist, tilpasset, fest som skal til.</p>
+              <a href="#" class="card-link">Forespør montering</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image" style="background-image: url('https://picsum.photos/seed/renovering5/800/600');"></div>
+            <div class="card-body">
+              <div class="card-eyebrow">Totalprosjekt</div>
+              <h3>Renovering</h3>
+              <p>Vi tar prosjektledelsen, du tar plass i sofaen.</p>
+              <a href="#" class="card-link">Forespør renovering</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section class="compare">
+    <div class="container">
+      <h2>Hvilken velger vi?</h2>
+      <p>Si fra hvilken variant du liker best (1–5), så implementerer jeg den i Services-komponenten på hovedsiden. Du kan også blande — f.eks. "Variant 2, men uten eyebrow-tag" eller "Variant 1 med rotering fra 5".</p>
+    </div>
+  </section>
+
+</body>
+</html>
