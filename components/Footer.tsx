@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -21,20 +22,20 @@ export default function Footer() {
           <div className="footer-col">
             <h5>Tjenester</h5>
             <ul>
-              <li><a href="/#tjenester">Tilbygg og påbygg</a></li>
-              <li><a href="/#tjenester">Terrasser</a></li>
-              <li><a href="/#tjenester">Innvendig snekring</a></li>
-              <li><a href="/#tjenester">Renovering</a></li>
+              <li><Link href="/tjenester/tilbygg">Tilbygg og påbygg</Link></li>
+              <li><Link href="/tjenester/terrasser">Terrasser</Link></li>
+              <li><Link href="/tjenester/snekring">Innvendig snekring</Link></li>
+              <li><Link href="/tjenester/renovering">Renovering</Link></li>
             </ul>
           </div>
 
           <div className="footer-col">
             <h5>Firma</h5>
             <ul>
-              <li><a href="/#om-oss">Om oss</a></li>
-              <li><a href="/#prosess">Slik jobber vi</a></li>
-              <li><a href="/trygghetsgaranti">Trygghetsgaranti</a></li>
-              <li><a href="/#kontakt">Kontakt</a></li>
+              <li><Link href="/#om-oss">Om oss</Link></li>
+              <li><Link href="/#prosess">Slik jobber vi</Link></li>
+              <li><Link href="/trygghetsgaranti">Trygghetsgaranti</Link></li>
+              <li><Link href="/#kontakt">Kontakt</Link></li>
             </ul>
           </div>
 
@@ -51,7 +52,7 @@ export default function Footer() {
         <div className="footer-bottom">
           <div>© {new Date().getFullYear()} Svartdahl bygg og eiendom AS · Org.nr. 000 000 000</div>
           <div>
-            <a href="/personvern">Personvern</a> · <a href="/cookies">Cookies</a>
+            <Link href="/personvern">Personvern</Link> · <Link href="/cookies">Cookies</Link>
           </div>
         </div>
       </div>
